@@ -1,0 +1,19 @@
+﻿@model ProductControllerViewModel
+@{
+
+}
+
+<h2>Product Title</h2>
+
+<table class="table table-responsive">
+    @foreach (var product in Model.Products)
+    {
+        <tr>
+            <td>@product.ProductName</td>
+            <td>@product.CategoryId</td>
+            <td>@product.QuantityPerUnit</td>
+            <td>@product.UnitPrice</td>
+            <td>@product.UnitsInStock</td>        
+        </tr>
+    }
+</table>

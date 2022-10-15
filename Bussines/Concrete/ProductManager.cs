@@ -30,6 +30,11 @@ namespace Bussines.Concrete
            return a;
         }
 
+        public Product GetById2(int productId)
+        {
+            return _productDal.Get(p => p.ProductId == productId);
+        }
+
 
         // List olarak döndersek ne olur sonucuna bak
        

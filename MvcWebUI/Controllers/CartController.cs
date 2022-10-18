@@ -60,5 +60,27 @@ namespace MvcWebUI.Controllers
 
             return RedirectToAction("Index", "Cart");
         }
+
+        public IActionResult Complete()
+        {
+            var model = new ShippingDetailViewModel()
+            {
+                shippingDetail = new ShippingDetail()
+            };
+            return View(model);
+        }
+
+        [HttpPost]
+
+        public IActionResult Complete(ShippingDetail shippingDetail)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View();
+            }
+            TempData.Add("message", "Shipping completed");
+            _cartSessionHelper.Clear();
+            return RedirectToAction("Index", "Product");
+        }
     }
 }

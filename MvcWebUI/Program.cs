@@ -2,12 +2,18 @@ using Bussines.Abstract;
 using Bussines.Concrete;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using MvcWebUI.Helpers;
+using MvcWebUI.Models;
+using MvcWebUI.ValidationRule.FluentValidation;
+using System;
+using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddFluentValidation(option=>option.RegisterValidatorsFromAssembly(Assembly.GetExecutingAssembly()));
 builder.Services.AddSingleton<IProductService, ProductManager>();
 builder.Services.AddSingleton<IProductDal, EfProductDal>();
 builder.Services.AddSingleton<ICategoryDal,EfCategoryDal>();
@@ -16,6 +22,7 @@ builder.Services.AddScoped<ICartSessionHelper, CartSessionHelper>();
 builder.Services.AddScoped<ICartService, CartManager>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 builder.Services.AddSession();
+
 
 var app = builder.Build();
 
